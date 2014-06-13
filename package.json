@@ -1,0 +1,24 @@
+{
+  "name": "Piggyback",
+  "version": "0.0.1",
+  "contributors": [
+    {
+      "name": "Pete Mertz",
+      "email": "peter.s.mertz@gmail.com"
+    },
+      {
+	  "name": "Will Weiss"
+      },
+      {
+	  "name": "Luke Breckenridge"
+      }
+  ],
+  "dependencies": {
+    "express": "~4.2.0",
+    "body-parser": "~1.2.0",
+    "chai": "*",
+    "mongoose": "~3.8.9",
+    "redis": "~0.10.1",
+    "socket.io": "*"
+  }
+}
