@@ -11,13 +11,20 @@
      <!-- AngularJS -->
      <script src="/app.js" type="text/javascript"></script>
      <script src="/controllers/feed_controller.js" type="text/javascript"></script>
+     <script src="/controllers/feed_item_controller.js" type="text/javascript"></script>
      
      <!-- CSS -->
      <link rel="stylesheet" type="text/css" href="/views/general.css">
 </head>
 <body>
-  <div ng-app="PiggybackApp" ng-controller="FeedController as feed">
-    {{feed.testString}}
+  <div class="Content">
+    <div ng-app="PiggybackApp" ng-controller="FeedController as feed">
+      <div ng-repeat="item in feed.topFeedItems | limitTo: feed.feedDisplayQuantity" ng-controller="FeedItemController as feedItem" ng-init="feedItem.init(item)" class="FeedItem">
+	<div>{{feedItem.item.business.name}}</div>
+	<div>{{feedItem.item.offer.description}}</div>
+	<div>{{feedItem.getTimeLeft( feedItem.item.piggyback.expiresAt )}}</div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
