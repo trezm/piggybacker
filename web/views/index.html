@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+     <title>Piggyback</title>
+
+     <!-- Bower Components -->
+     <script src="/bower/angular/angular.min.js" type="text/javascript"></script>
+     <script src="/bower/socket.io/socket.io.js" type="text/javascript"></script>
+
+     <!-- libs -->
+
+     <!-- AngularJS -->
+     <script src="/app.js" type="text/javascript"></script>
+     <script src="/controllers/feed_controller.js" type="text/javascript"></script>
+     
+     <!-- CSS -->
+     <link rel="stylesheet" type="text/css" href="/views/general.css">
+</head>
+<body>
+  <div ng-app="PiggybackApp" ng-controller="FeedController as feed">
+    {{feed.testString}}
+  </div>
+</body>
+</html>
