@@ -1,19 +1,74 @@
 body {
-    background-color: #ffd3d3;
-    color: #FFFFFF;
+    background-color: #FFCCFF;
+    color: #787878;
+    font-size: 100%;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.header {
+	background-color:#FFFFFF;
+	width:100%;
+	border: 1px solid #000000;
+	margin-left: 20px auto;
 }
 
 .Content {
+	background-color: #FFFFFF;
     width: 500px;
+    height: 900000px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 100px;
 }
 
 .FeedItem {
-    border-top: 1px solid #FFFFFF;
-    padding: 10px 0 10px 0;
+    border-top: 2px solid #787878;
+    margin: 10px 0 10px 0;
+    padding: 10px 50px 10px 50px;
 }
 
 .FeedItem:last-child {
-    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 2px solid #787878;
+}
+.button {
+   width:46px; 
+   height:60px; 
+   float: right;
+   padding:0; 
+}
+.button_about {
+	background:url("http://i.imgur.com/QID6PFj.png");
+	background-size: 100% 100%;
+	border: 0	;
+}
+
+.MenuBar {
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left:0px;
+  background-color: #FFFFFF;
+}
+
+.Logo {
+  width: 300px;
+  background-color:#FFFFFF;
+  height: 84px;
+
+
+}
+.About {
+  float: right;
+  padding:0;
+  margin: 0;
+}
+
+.login {
+  position: fixed;
+  margin: 20px auto;
+  padding: 20px 20px 20px 20px;
+  width: 310px;
+  background: white;
+  border-radius: 3px;
+  @include box-shadow(0 0 200px rgba(white, .5), 0 1px 2px rgba(black, .3));
 }

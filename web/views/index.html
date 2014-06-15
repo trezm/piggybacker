@@ -22,12 +22,36 @@
 </script><!-- CSS -->
         <link rel="stylesheet" type="text/css" href="/views/general.css">
         <link rel="stylesheet" type="text/css" href="/views/feed.css">
+        <link rel="stylesheet" type="text/css" href="/views/general.css">
     </head>
     <body>
+        <div class="MenuBar">
+            <img src="http://i.imgur.com/7zSbsIo.png" class="Logo">
+            <div class="About" ref="http://piggybackerapp.com/about">
+                About
+            </div>
+        </div>
+        <div class="login">
+            <form method="post" action="index.html">
+                <p>
+                    <input type="text" name="login" value="" placeholder="Username or Email">
+                </p>
+                <p>
+                    <input type="password" name="password" value="" placeholder="Password">
+                </p>
+                <p class="remember_me">
+                    <label><input type="checkbox" name="remember_me" id="remember_me"> Remember me on this computer</label>
+                </p>
+                <p class="submit">
+                    <input type="submit" name="commit" value="Login">
+                </p>
+            </form>
+        </div>
         <div class="Content">
             <div ng-app="PiggybackApp" ng-controller="FeedController as feed">
                 <ul>
                     <li ng-repeat="item in feed.promotions | limitTo: feed.feedDisplayQuantity" ng-controller="FeedItemController as feedItem" ng-init="feedItem.init(item)" class="FeedItem animate-repeat">
+                        <input type="button" class="button button_about">
                         <div>
                             {{feedItem.item.created_date}}
                         </div>

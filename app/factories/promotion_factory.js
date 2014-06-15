@@ -42,6 +42,7 @@ async.parallel({
 		promotion.condition = condition;
 		promotion.hoponoffer = hoponOffer;
 		promotion.piggybackoffer = piggybackOffer;
+		promotion.end_date = (new Date()).setDate((new Date()).getDate() + Math.ceil( Math.random() * 6 ) + 1)
 		hoponOffer.discounts = [discount];
 		piggybackOffer.discounts = [discount];
 		discount.qualifying_items = [item];
