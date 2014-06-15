@@ -25,5 +25,10 @@ var router = require( './config/routes.js' )
 router( app, passport );
 configure( app );
 
-app.listen( settings.PORT );
+var server = app.listen( settings.PORT );
+var io = require('socket.io').listen(server);
+
+var socket = require( './config/socket.js' );
+socket( io );
+
 console.log( "Starting server..." );

@@ -17,32 +17,53 @@ var Condition = require('../models/promotion/condition/condition.js');
 
 module.exports.PromotionController = {
 	create: function(endDate, condition, callback) {
-		async.parallel([
-			function(callback) {
-				Condition(condition, function(error, results){
+		async.parallel({
+			condition: function(callback) {
+				Condition.create(condition, function(error, results){
 					if (error) {
-						
+						callback(error);
+						return;
 					}
-				})
+					callback(null, results);
+				});
 			},
-			function(callback) {
-
+			promotion: function(callback) {
+				Promotion.create({end_date: endDate}, function(error, results){
+					if (error){
+						callback(error);
+						return;
+					}
+					callback(null, results);
+				});
 			}
-		], function(error, results) {
-			callback( error, results );
+		}, function(error, results) {
+			var promotion = results.promotion;
+			promotion.condition = results.condition;
+			promotion.save(callback);
 		});
 	},
 
-	read: function(callback) {
-
+	read: function(params, callback) {
+		Promotion.find(params, callback);
 	},
 
-	update: function(callback) {
-
+	update: function(params, updateQuery, callback) {
+		Promotion.update(params, updateQuery, callback);
 	},
 
-	destroy: function(callback) {
+	destroy: function(params, callback) {
+		Promotion.remove(params, callback)
+	},
 
+	getCondition: function(params, callback) {
+		this.read(params, function(error, results) {
+			if ( error ) {
+				callback( error );
+				return;
+			}
+
+			Condition.findOne( results[ 0 ].condition, callback );
+		})
 	}
 }
 
