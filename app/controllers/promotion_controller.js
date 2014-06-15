@@ -3,23 +3,16 @@ var async = require('async');
 var settings = require('../../settings');
 var Promotion = require('../models/promotion/promotion.js');
 var Condition = require('../models/promotion/condition/condition.js');
-
-// Promotion Schema
-// var Schema = schema({
-//     condition : {type : schema.ObjectId, ref : 'Condition'},
-//     piggybackoffer : {type : schema.ObjectId, ref : 'Piggybackoffer'},
-//     hoponoffer : {type : schema.ObjectId, ref : 'Hoponoffer'},
-//     created_date: { type: Date, default: Date.now },
-//     end_date: { type: Date, default: Date.now },
-//     updated_date: { type: Date, default: Date.now },
-//     active: Boolean,
-// });
+var HoponOffer = require('../models/promotion/offer/hoponoffer.js');
+var PiggybackOffer = require('../models/promotion/offer/piggybackoffer.js');
+var Discount = require('../models/promotion/discount/discount.js');
+var Item = require('../models/promotion/discount/item/item.js');
 
 module.exports.PromotionController = {
 	create: function(endDate, condition, callback) {
 		async.parallel({
 			condition: function(callback) {
-				Condition.create(condition, function(error, results){
+				Condition.create(condition, function(error, results) {
 					if (error) {
 						callback(error);
 						return;
@@ -28,8 +21,10 @@ module.exports.PromotionController = {
 				});
 			},
 			promotion: function(callback) {
-				Promotion.create({end_date: endDate}, function(error, results){
-					if (error){
+				Promotion.create({
+					end_date: endDate
+				}, function(error, results) {
+					if (error) {
 						callback(error);
 						return;
 					}
@@ -47,6 +42,22 @@ module.exports.PromotionController = {
 		Promotion.find(params, callback);
 	},
 
+	readPiggybackOffer: function(params, callback) {
+		PiggybackOffer.find(params, callback);
+	},
+
+	readHoponOffer: function(params, callback) {
+		HoponOffer.find(params, callback);
+	},
+
+	readDiscount: function(params, callback) {
+		Discount.find(params, callback);
+	},
+
+	readItem: function(params, callback) {
+		Item.find(params, callback);
+	},
+
 	update: function(params, updateQuery, callback) {
 		Promotion.update(params, updateQuery, callback);
 	},
@@ -55,18 +66,74 @@ module.exports.PromotionController = {
 		Promotion.remove(params, callback)
 	},
 
-	getCondition: function(params, callback) {
+	getCondition: function(params, callback) {	
 		this.read(params, function(error, results) {
-			if ( error ) {
-				callback( error );
+			if (error) {
+				callback(error);
 				return;
 			}
 
-			Condition.findOne( results[ 0 ].condition, callback );
+			Condition.findOne(results[0].condition, callback);
 		})
 	}
 }
 
 module.exports.PromotionControllerRoutes = {
 
+}
+
+module.exports.PromotionControllerSocket = function(socket) {
+	socket.on('CreatePromotion', function(data) {
+		module.exports.PromotionController.create(data.endDate, data.condition, function(error, results) {
+			socket.emit('PromotionCreated', {
+				error: error,
+				results: results
+			});
+		});
+	});
+
+	socket.on('ReadPromotion', function(data) {
+		module.exports.PromotionController.read(data, function(error, results) {
+			socket.emit('PromotionRead', {
+				error: error,
+				results: results
+			});
+		});
+	});
+
+	socket.on('ReadPiggybackOffer', function(data) {
+		module.exports.PromotionController.readPiggybackOffer(data, function(error, results) {
+			socket.emit('PiggybackOfferRead', {
+				error: error,
+				results: results
+			});
+		});		
+	});
+
+	socket.on('ReadHoponOffer', function(data) {
+		module.exports.PromotionController.readHoponOffer(data, function(error, results) {
+			socket.emit('HoponOfferRead', {
+				error: error,
+				results: results
+			});
+		});		
+	});
+
+	socket.on('ReadDiscount', function(data) {
+		module.exports.PromotionController.readDiscount(data, function(error, results) {
+			socket.emit('DiscountRead', {
+				error: error,
+				results: results
+			});
+		});		
+	});
+
+	socket.on('ReadItem', function(data) {
+		module.exports.PromotionController.readItem(data, function(error, results) {
+			socket.emit('ItemRead', {
+				error: error,
+				results: results
+			});
+		});		
+	});
 }

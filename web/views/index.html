@@ -19,10 +19,9 @@
 <body>
   <div class="Content">
     <div ng-app="PiggybackApp" ng-controller="FeedController as feed">
-      <div ng-repeat="item in feed.topFeedItems | limitTo: feed.feedDisplayQuantity" ng-controller="FeedItemController as feedItem" ng-init="feedItem.init(item)" class="FeedItem">
-	<div>{{feedItem.item.business.name}}</div>
-	<div>{{feedItem.item.offer.description}}</div>
-	<div>{{feedItem.getTimeLeft( feedItem.item.piggyback.expiresAt )}}</div>
+      <div ng-repeat="item in feed.promotions | limitTo: feed.feedDisplayQuantity" ng-controller="FeedItemController as feedItem" ng-init="feedItem.init(item)" class="FeedItem">
+        <div>{{feedItem.item.created_date}}</div>
+      	<div>{{feedItem.getTimeLeft( feedItem.item.end_date )}}</div>
       </div>
     </div>
   </div>
