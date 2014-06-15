@@ -18,14 +18,14 @@ var Schema = schema({
 });
 
 // generating a hash
-// Schema.statics.generatePasswordHash = function(password) {
-//     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-// };
+Schema.statics.generatePasswordHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-// // checking if password is valid
-// Schema.methods.isPasswordValid = function(password) {
-//     return bcrypt.compareSync(password, this.password);
-// };
+// checking if password is valid
+Schema.methods.isPasswordValid = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', Schema);

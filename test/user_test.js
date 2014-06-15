@@ -1,7 +1,7 @@
 var settings = require( '../settings.js' );
 var mongoose = require( 'mongoose' );
 var expect = require( "chai" ).expect;
-var User = require( '../app/models/user.js' );
+var User = require( '../app/models/user/user.js' );
 
 describe( "User", function() {
     var user;

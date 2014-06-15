@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 var bcrypt   = require('bcrypt-nodejs');
 
-var Schema = Schema({
+var Schema = schema({
     max_piggyback_radius : Number,
     max_hopon_radius : Number,
     max_total_distance : Number,

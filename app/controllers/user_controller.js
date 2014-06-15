@@ -1,5 +1,5 @@
 var settings = require( '../../settings' );
-var User = require( '../models/user.js' );
+var User = require( '../models/user/user.js' );
 
 var create = function( user, callback ) {
     user.password = User.generatePasswordHash( user.password );
