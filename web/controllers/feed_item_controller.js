@@ -1,6 +1,5 @@
 // To be removed later
 var socket = io();
-var feedDisplayQuantity = 5;
 
 var getPiggybackOffer = function(offerId) {
 	socket.emit('ReadPiggybackOffer', {_id: offerId});
@@ -44,7 +43,7 @@ app.controller('FeedItemController', function($scope) {
 	}
 
 	this.interval = setInterval(function() {
-		$scope.$apply();
+		//$scope.$apply();
 	}, 1000);
 
 	this.getTimeLeft = getTimeLeft;

@@ -1,29 +1,42 @@
-<!DOCTYPE html>
-<head>
-     <title>Piggyback</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+        <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.12), see www.w3.org">
+        <title>
+            Piggyback
+        </title><!-- Bower Components -->
 
-     <!-- Bower Components -->
-     <script src="/bower/angular/angular.min.js" type="text/javascript"></script>
-     <script src="/bower/socket.io/socket.io.js" type="text/javascript"></script>
+        <script src="/bower/angular/angular.min.js" type="text/javascript">
+</script>
+        <script src="/bower/angular-animate/angular-animate.min.js" type="text/javascript">
+</script>
+        <script src="/bower/socket.io/socket.io.js" type="text/javascript">
+</script><!-- libs -->
+        <!-- AngularJS -->
 
-     <!-- libs -->
-
-     <!-- AngularJS -->
-     <script src="/app.js" type="text/javascript"></script>
-     <script src="/controllers/feed_controller.js" type="text/javascript"></script>
-     <script src="/controllers/feed_item_controller.js" type="text/javascript"></script>
-     
-     <!-- CSS -->
-     <link rel="stylesheet" type="text/css" href="/views/general.css">
-</head>
-<body>
-  <div class="Content">
-    <div ng-app="PiggybackApp" ng-controller="FeedController as feed">
-      <div ng-repeat="item in feed.promotions | limitTo: feed.feedDisplayQuantity" ng-controller="FeedItemController as feedItem" ng-init="feedItem.init(item)" class="FeedItem">
-        <div>{{feedItem.item.created_date}}</div>
-      	<div>{{feedItem.getTimeLeft( feedItem.item.end_date )}}</div>
-      </div>
-    </div>
-  </div>
-</body>
+        <script src="/app.js" type="text/javascript">
+</script>
+        <script src="/controllers/feed_controller.js" type="text/javascript">
+</script>
+        <script src="/controllers/feed_item_controller.js" type="text/javascript">
+</script><!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="/views/general.css">
+        <link rel="stylesheet" type="text/css" href="/views/feed.css">
+    </head>
+    <body>
+        <div class="Content">
+            <div ng-app="PiggybackApp" ng-controller="FeedController as feed">
+                <ul>
+                    <li ng-repeat="item in feed.promotions | limitTo: feed.feedDisplayQuantity" ng-controller="FeedItemController as feedItem" ng-init="feedItem.init(item)" class="FeedItem animate-repeat">
+                        <div>
+                            {{feedItem.item.created_date}}
+                        </div>
+                        <div>
+                            {{feedItem.getTimeLeft( feedItem.item.end_date )}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>

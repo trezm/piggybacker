@@ -1,1 +1,3 @@
-var app = angular.module( "PiggybackApp", [] );
+var app = angular.module( "PiggybackApp", [
+		'ngAnimate'
+	] );
